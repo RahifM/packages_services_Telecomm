@@ -21,14 +21,16 @@ import android.content.Intent;
 import android.telephony.PhoneNumberUtils;
 
 public class PhoneNumberUtilsAdapterImpl implements PhoneNumberUtilsAdapter {
+
+     
     @Override
     public boolean isLocalEmergencyNumber(Context context, String number) {
-            return TelephonyUtil.isLocalEmergencyNumber(number);
+            return TelephonyUtil.isLocalEmergencyNumber(context, number);
     }
 
     @Override
     public boolean isPotentialLocalEmergencyNumber(Context context, String number) {
-        return TelephonyUtil.isPotentialLocalEmergencyNumber(number);
+        return TelephonyUtil.isPotentialLocalEmergencyNumber(context, number);
     }
 
     @Override
