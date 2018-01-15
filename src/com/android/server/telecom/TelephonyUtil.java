@@ -79,17 +79,9 @@ public final class TelephonyUtil {
         return handle != null && isLocalEmergencyNumber(handle.getSchemeSpecificPart());
     }
 
-    private static IExtTelephony getIExtTelephony() {
-        try {
-            IExtTelephony ex = IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
-            return ex;
-        } catch (NoClassDefFoundError ex) {
-            return null;
-        }
-    }
-
     public static boolean isLocalEmergencyNumber(String address) {
-        IExtTelephony mIExtTelephony = getIExtTelephony();
+        IExtTelephony mIExtTelephony =
+            IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
         boolean result = false;
         try {
             result = mIExtTelephony.isLocalEmergencyNumber(address);
@@ -102,7 +94,8 @@ public final class TelephonyUtil {
     }
 
     public static boolean isPotentialLocalEmergencyNumber(String address) {
-        IExtTelephony mIExtTelephony = getIExtTelephony();
+        IExtTelephony mIExtTelephony =
+            IExtTelephony.Stub.asInterface(ServiceManager.getService("extphone"));
         boolean result = false;
         try {
             result = mIExtTelephony.isPotentialLocalEmergencyNumber(address);
